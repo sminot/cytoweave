@@ -71,13 +71,17 @@ with the dataset's sample metadata, QC, and which outputs to write. The
 template is a `.cwt` file in any of the project's datasets: in CytoWeave,
 *Save as a template…* and *Download (.cwt)*, then upload it to the project.
 
-`preprocess.py` runs before the workflow. It lists the input dataset's FCS
-files for `--input`, and turns Cirro's sample metadata (condition, donor,
-timepoint) into an annotations table keyed by file name for `--annotations`.
-A file name that more than one file has is left out of the table, since the
-name cannot say which sample it is. CytoWeave reads that table without
-quoting, so commas, semicolons, tabs and quotes in the metadata become spaces.
-`test_preprocess.py` tests it offline (`pytest pipeline/cirro`).
+`preprocess.py` runs before the workflow. It lists the FCS files in the input
+dataset's storage for `--input` (Cirro's own file table holds only files linked
+to samples, and an FCS dataset's files are not), and turns Cirro's sample
+metadata (condition, donor, timepoint) into an annotations table for
+`--annotations`. The table is keyed by sample name, which CytoWeave matches to
+the file `<sample>.fcs`; where Cirro links files to samples, it is keyed by
+file name instead, leaving out a name that more than one file has. The process
+must use a sample sheet (`usesSampleSheet`) for Cirro to pass the metadata.
+CytoWeave reads the table without quoting, so commas, semicolons, tabs and
+quotes in the metadata become spaces. `test_preprocess.py` tests it offline
+(`pytest pipeline/cirro`).
 
 Each run uses 8 CPUs and 32 GB, and runs again with twice the memory when it
 runs out. All the files are analyzed in one Chromium page, as in the window;

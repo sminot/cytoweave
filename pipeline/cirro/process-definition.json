@@ -1,6 +1,6 @@
 {
   "id": "cytoweave-run",
-  "name": "CytoWeave: apply an analysis template",
+  "name": "Apply a CytoWeave template",
   "desc": "Applies a CytoWeave analysis template to every FCS file of a dataset and writes its tables, batch report, workspace, methods and a record of every count.",
   "executor": "NEXTFLOW",
   "category": "Flow Cytometry",
