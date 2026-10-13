@@ -1,0 +1,11 @@
+{
+  "template": "$.dataset.params.analysis.template",
+  "sample_metadata": "$.dataset.params.analysis.sample_metadata",
+  "qc": "$.dataset.params.analysis.qc",
+  "report": "$.dataset.params.outputs.report",
+  "report_by": "$.dataset.params.outputs.report_by",
+  "flowjo": "$.dataset.params.outputs.flowjo",
+  "review": "$.dataset.params.outputs.review",
+  "certificate": "$.dataset.params.outputs.certificate",
+  "outdir": "$.dataset.dataPath"
+}

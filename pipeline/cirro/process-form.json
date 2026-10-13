@@ -1,0 +1,78 @@
+{
+  "form": {
+    "type": "object",
+    "properties": {
+      "analysis": {
+        "type": "object",
+        "title": "Analysis",
+        "properties": {
+          "template": {
+            "type": "string",
+            "title": "Analysis template",
+            "description": "A CytoWeave template (.cwt): the gates, tables and figures to apply to every sample. Make one in CytoWeave with Save as a template… and Download (.cwt), then upload it to the project.",
+            "pathType": "dataset",
+            "file": "**/*.cwt"
+          },
+          "sample_metadata": {
+            "type": "boolean",
+            "title": "Annotate samples with the dataset's sample metadata",
+            "description": "Gives each sample the metadata Cirro holds for it (condition, donor, timepoint), for tables and reports grouped by it.",
+            "default": true
+          },
+          "qc": {
+            "type": "boolean",
+            "title": "Run acquisition QC first",
+            "description": "Removes unstable stretches of acquisition with a \"QC pass\" population above the template's.",
+            "default": false
+          }
+        },
+        "required": ["template"]
+      },
+      "outputs": {
+        "type": "object",
+        "title": "Outputs",
+        "properties": {
+          "report": {
+            "type": "string",
+            "title": "Batch report",
+            "description": "The template's last figure for every sample.",
+            "default": "pdf",
+            "enum": ["pdf", "pptx", "none"],
+            "enumNames": ["PDF", "PowerPoint", "None"]
+          },
+          "report_by": {
+            "type": "string",
+            "title": "Report pages by",
+            "description": "One page per sample (sample), or per value of an annotation such as subject. Empty: the figure's own choice.",
+            "pattern": "^[A-Za-z0-9 _.-]*$"
+          },
+          "flowjo": {
+            "type": "boolean",
+            "title": "FlowJo workspace (workspace.wsp)",
+            "default": false
+          },
+          "review": {
+            "type": "boolean",
+            "title": "Review report (review.html)",
+            "description": "The analysis as one HTML file with every number traced, for a PI or reviewer.",
+            "default": false
+          },
+          "certificate": {
+            "type": "boolean",
+            "title": "Reproducibility certificate (certificate.acs)",
+            "description": "The analysis with its files and every number, for cytoweave verify.",
+            "default": false
+          }
+        }
+      }
+    }
+  },
+  "ui": {
+    "ui:order": ["analysis", "outputs"],
+    "outputs": {
+      "report_by": {
+        "ui:placeholder": "sample"
+      }
+    }
+  }
+}
