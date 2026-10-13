@@ -78,8 +78,10 @@ metadata (condition, donor, timepoint) into an annotations table for
 `--annotations`. The table is keyed by sample name, which CytoWeave matches to
 the file `<sample>.fcs`; where Cirro links files to samples, it is keyed by
 file name instead, leaving out a name that more than one file has. The process
-must use a sample sheet (`usesSampleSheet`) for Cirro to pass the metadata.
-CytoWeave reads the table without quoting, so commas, semicolons, tabs and
+must use a sample sheet (`usesSampleSheet`) for Cirro to pass the metadata, and
+Cirro passes only the samples it links to an input dataset's files: on
+dev.cirro.bio an FCS dataset with a samplesheet still arrived with no samples,
+so its runs are not annotated (the log says "Annotations: 0 rows"). CytoWeave reads the table without quoting, so commas, semicolons, tabs and
 quotes in the metadata become spaces. `test_preprocess.py` tests it offline
 (`pytest pipeline/cirro`).
 
